@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+data/*.db
+backtest/full_run*.log
+backtest/momentum_trades.csv
+backtest/momentum_summary.json
+backtest/summary.json
+backtest/trades.csv
+alert/signals.log
+.env
+*.nohup

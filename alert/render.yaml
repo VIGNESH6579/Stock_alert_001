@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: oi-edge-alerts
+    env: python
+    region: oregon
+    plan: free
+    buildCommand: ""
+    startCommand: gunicorn --bind 0.0.0.0:$PORT --workers 1 --threads 2 alert.server:app
+    envVars:
+      - key: NTY_TOPIC
+        value: stock_alert
+      - key: NTY_URL
+        value: https://ntfy.sh
