@@ -51,7 +51,7 @@ FEE_PCT = 0.0005
 # per-stock tracking: (side, entry_prem, entry_time, strike, bars_held, fired_tg1)
 POSITIONS = {}
 LAST_SIGNAL_AT = {}            # cooldown per stock
-SIGNAL_LOG = "/home/ubuntu/option_scalp/alert/signals.log"
+SIGNAL_LOG = os.path.join(os.path.dirname(os.path.abspath(__file__)), "signals.log")
 
 
 def rsi(close, n=14):

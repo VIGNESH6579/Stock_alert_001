@@ -1,0 +1,17 @@
+{
+  "name": "oi-edge-alerts",
+  "type": "web_service",
+  "ownerId": "tea-d723ev75gffc73e9tuig",
+  "serviceDetails": {
+    "repo": "https://github.com/VIGNESH6579/Stock_alert_001.git",
+    "branch": "main",
+    "buildCommand": "",
+    "startCommand": "gunicorn --bind 0.0.0.0:$PORT --workers 1 --threads 2 alert.server:app",
+    "envVars": [
+      {"key": "NTY_TOPIC", "value": "stock_alert"},
+      {"key": "NTY_URL", "value": "https://ntfy.sh"}
+    ],
+    "plan": {"type": "free"},
+    "region": "oregon"
+  }
+}

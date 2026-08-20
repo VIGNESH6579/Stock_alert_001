@@ -13,11 +13,12 @@ import time
 import sqlite3
 from datetime import datetime, timedelta
 
+import os
 import pandas as pd
 import yfinance as yf
 
-UNIVERSE_PATH = "/home/ubuntu/option_scalp/data/universe.json"
-DB_PATH = "/home/ubuntu/option_scalp/data/snapshots.db"
+UNIVERSE_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "universe.json")
+DB_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "snapshots.db")
 
 HEADERS = {
     "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
