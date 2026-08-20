@@ -59,3 +59,11 @@
 
 ## Backtest results (to fill)
 - summary.json path: ~/option_scalp/backtest/summary.json
+
+## DEPLOYMENT SUCCESS (Aug 21)
+- oi-edge-alerts (srv-da3l5v3bc2fs73a9980g) LIVE on Render free tier: https://oi-edge-alerts.onrender.com
+- Root cause of earlier failures: hardcoded /home/ubuntu paths in datafeed.py + scanner.py + nse_client.py; fixed to relative paths. Added bootstrap start.sh + EXPOSE/PORT env.
+- Deploy trigger quirk: POST /deploys needs body '{}' (data=b"{}"), clearCache field causes 'invalid JSON' 400.
+- Live verified: POST /trigger -> 20 signals; ntfy stock_alert confirmed 20/20 messages (BULL APOLLOHOSP, BEAR BANDHANBNK...).
+- Full backtest summary: backtest/momentum_summary.json (7959 trades, PF 1.43, expectancy +2.339%/trade).
+- Final report: FINAL_REPORT.md. Deployed. Task complete.
