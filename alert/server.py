@@ -74,9 +74,12 @@ def _market_hours(now):
 
 
 def _self_ping():
-    """Keep the free-tier Render service awake during market hours so the
-    health check never stalls on cold-start. Free web services sleep after
-    15 min of inactivity; a GET /health every 10 min prevents that."""
+    """Keep the free-tier Render service awake during market hours.
+
+    Render spins down a free web service after 15 min without *inbound*
+    traffic. We register as inbound traffic by periodically calling our own
+    public /health URL (through Render's router), every 3 min.
+    """
     try:
         import urllib.request
         url = os.getenv("SERVICE_URL", "")
@@ -87,23 +90,25 @@ def _self_ping():
         if not url:
             return
         req = urllib.request.Request(url.rstrip("/") + "/health")
-        urllib.request.urlopen(req, timeout=15)
-        print(f"[{datetime.now():%H:%M:%S}] self-ping ok", flush=True)
+        resp = urllib.request.urlopen(req, timeout=15)
+        print(f"[{datetime.now():%H:%M:%S}] self-ping ok HTTP {resp.status}",
+              flush=True)
     except Exception as exc:
         print(f"self-ping fail: {str(exc)[:60]}", flush=True)
 
 
 def background_loop():
     """Market-hours loop: sweep every 5 min during 9:20-15:20 IST, with a
-    10-minute self-ping to defeat Render free-tier sleep."""
-    last_sweep = 0.0
+    3-minute self-ping to defeat Render free-tier sleep (15-min idle rule)."""
+    _self_ping()                                 # ping immediately on boot
+    last_sweep = time.time() - 200               # sweep within 3 min of boot
     last_ping = 0.0
     while True:
         now = datetime.now()
         in_market = _market_hours(now)
         t = time.time()
         if in_market:
-            if t - last_sweep >= 300:          # full-universe sweep every 5 min
+            if t - last_sweep >= 300:            # full-universe sweep every 5 min
                 try:
                     n = scanner.run_pass(SYMBOLS)
                     print(f"[{now:%H:%M:%S}] bg sweep — {n} signals",
@@ -111,7 +116,7 @@ def background_loop():
                 except Exception as exc:
                     print(f"bg sweep error: {str(exc)[:80]}", flush=True)
                 last_sweep = t
-            if t - last_ping >= 600:           # self-ping every 10 min
+            if t - last_ping >= 180:             # self-ping every 3 min
                 _self_ping()
                 last_ping = t
         time.sleep(60)
