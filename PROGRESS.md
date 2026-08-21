@@ -67,3 +67,14 @@
 - Live verified: POST /trigger -> 20 signals; ntfy stock_alert confirmed 20/20 messages (BULL APOLLOHOSP, BEAR BANDHANBNK...).
 - Full backtest summary: backtest/momentum_summary.json (7959 trades, PF 1.43, expectancy +2.339%/trade).
 - Final report: FINAL_REPORT.md. Deployed. Task complete.
+
+## 208-STOCK FEEDBACK ROUND (Aug 21)
+- User provided new Excel (NSE_FO_Options_Stocks_List.xlsx): 208 unique names.
+- User: skip LTIMindtree → universe = 207.
+- Ticker renames applied after validation: United Spirits MCDOWELL-N->UNITDSPR, NALCO->NATIONALUM, Zomato->ETERNAL, Nippon India AMC->NAM-INDIA, GE Vernova->GVT&D, GMRINFRA->GMRAIRPORT, HITACHI->HIRECT.
+- universe_final.json: 207 names, 207 unique symbols, ALL 207 verified valid vs yfinance (verify_final207.py, VALID:207 BAD:0).
+- datafeed.load_universe() now reads universe_final.json (dict w/ symbols key, dedupes).
+- server.py: added _self_ping() every 10 min during market hours to defeat Render free-tier sleep; bg sweep every 5 min.
+- Deployed 38ec13d → live (dep-da3s09u1egvs73ao1ipg). Health shows 207 stocks.
+- LIVE VERIFICATION w/ real-time data: POST /trigger → 22 signals pushed to ntfy stock_alert (all confirmed via sse feed). UNITDSPR entry 1544.00 matches live Yahoo 15:10 IST close exactly. No hard-coded data.
+- PROJECT_DESCRIPTION.md written.
