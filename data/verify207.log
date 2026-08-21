@@ -1,0 +1,18 @@
+nohup: ignoring input
+50 done, bad: 0
+100 done, bad: 0
+$MCDOWELL-N.NS: No data found, symbol may be delisted
+$MCDOWELL-N.NS: No data found, symbol may be delisted
+$MCDOWELL-N.NS: No data found, symbol may be delisted
+$NALCO.NS: No data found, symbol may be delisted
+$NALCO.NS: No data found, symbol may be delisted
+$NALCO.NS: No data found, symbol may be delisted
+$NIPPOINDIA.NS: No data found, symbol may be delisted
+$NIPPOINDIA.NS: No data found, symbol may be delisted
+$NIPPOINDIA.NS: No data found, symbol may be delisted
+150 done, bad: 3
+200 done, bad: 3
+$ZOMATO.NS: No data found, symbol may be delisted
+$ZOMATO.NS: No data found, symbol may be delisted
+$ZOMATO.NS: No data found, symbol may be delisted
+VALID: 203 | BAD: ['MCDOWELL-N', 'NALCO', 'NIPPOINDIA', 'ZOMATO']

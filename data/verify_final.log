@@ -1,0 +1,29 @@
+nohup: ignoring input
+25/208 done, bad so far: 0
+50/208 done, bad so far: 0
+HTTP Error 404: {"quoteSummary":{"result":null,"error":{"code":"Not Found","description":"Quote not found for symbol: GE VERNOVA.NS"}}}
+$GE VERNOVA.NS: No data found, symbol may be delisted
+$GMRINFRA.NS: No data found, symbol may be delisted
+75/208 done, bad so far: 2
+$HITACHI.NS: No data found, symbol may be delisted
+100/208 done, bad so far: 3
+Failed to get ticker 'LTIM.NS' reason: Failed to perform, curl: (28) Operation timed out after 10002 milliseconds with 0 bytes received. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.
+$LTIM.NS: No data found, symbol may be delisted
+125/208 done, bad so far: 4
+$MCDOWELL-N.NS: No data found, symbol may be delisted
+$NALCO.NS: No data found, symbol may be delisted
+$NIPPOINDIA.NS: No data found, symbol may be delisted
+150/208 done, bad so far: 7
+175/208 done, bad so far: 7
+200/208 done, bad so far: 7
+$ZOMATO.NS: No data found, symbol may be delisted
+
+VALID: 200 | BAD: 8
+  BAD: ('GE Vernova', 'empty')
+  BAD: ('GMRINFRA', 'empty')
+  BAD: ('HITACHI', 'empty')
+  BAD: ('LTIM', 'empty')
+  BAD: ('MCDOWELL-N', 'empty')
+  BAD: ('NALCO', 'empty')
+  BAD: ('NIPPOINDIA', 'empty')
+  BAD: ('ZOMATO', 'empty')

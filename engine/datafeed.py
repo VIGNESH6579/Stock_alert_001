@@ -17,7 +17,7 @@ import os
 import pandas as pd
 import yfinance as yf
 
-UNIVERSE_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "universe.json")
+UNIVERSE_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "universe_final.json")
 DB_PATH = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "snapshots.db")
 
 HEADERS = {
@@ -31,7 +31,15 @@ HEADERS = {
 
 def load_universe():
     with open(UNIVERSE_PATH) as f:
-        return json.load(f)
+        data = json.load(f)
+    # universe_final.json is {"symbols": [...]} — fall back to list
+    syms = data["symbols"] if isinstance(data, dict) and "symbols" in data else data
+    seen, out = set(), []
+    for s in syms:
+        if s not in seen:
+            seen.add(s)
+            out.append(s)
+    return out
 
 
 # ---------------- price feed (Yahoo/TradingView) ----------------
