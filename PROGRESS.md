@@ -78,3 +78,11 @@
 - Deployed 38ec13d → live (dep-da3s09u1egvs73ao1ipg). Health shows 207 stocks.
 - LIVE VERIFICATION w/ real-time data: POST /trigger → 22 signals pushed to ntfy stock_alert (all confirmed via sse feed). UNITDSPR entry 1544.00 matches live Yahoo 15:10 IST close exactly. No hard-coded data.
 - PROJECT_DESCRIPTION.md written.
+
+## RENDER SLEEP FIX (Aug 21)
+- User log showed SIGTERM at 04:12 UTC = Render free-tier sleep after 15 min idle.
+- GitHub Actions keep-alive blocked (integration lacks workflows permission; user couldn't find Manus setting).
+- Fix deployed in 4a19d04: self-ping to own public /health every 3 min during market hours (9:15-15:25 IST); ping at boot; sweep within 3 min of boot. Render counts inbound HTTP to the public URL as activity.
+- Endurance test 04:48-05:04 UTC: service stayed WARM across 16+ min with NO external pings (health in 2.7s, not cold-start). FIX VERIFIED.
+- Live sweeps confirmed working: ntfy received BEAR OFSS (09:25 IST) and BULL AMBER during market hours.
+- Note: /signals API can be empty after deploys (ephemeral fs wipes signals.log) — ntfy alerts unaffected.
